@@ -1,14 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import LoginForm from './components/LoginForm'
+import Dashboard from './components/Dashboard' // You'll need to create this
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
-      <LoginForm />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        {/* Add more routes as needed */}
+      </Routes>
+    </BrowserRouter>
   )
 }
 
