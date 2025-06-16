@@ -13,14 +13,14 @@ const WelcomeCard = () => {
   const GreetingIcon = greeting.icon;
 
   const studentData = {
-    name: "Alex Johnson",
+    name: "Koushik Bala",
     id: "STU001",
     semester: "Fall 2024",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+    avatar: "src/koushik-bala-pp.jpg"
   };
 
   return (
-    <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl p-6 text-white relative overflow-hidden">
+    <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 rounded-2xl p-6 text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-4 right-4 w-32 h-32 bg-white rounded-full"></div>
@@ -45,18 +45,18 @@ const WelcomeCard = () => {
             
             <div>
               <div className="flex items-center space-x-2 mb-1">
-                <GreetingIcon size={20} className="text-yellow-300" />
+                <GreetingIcon size={20} className="text-yellow-100" />
                 <span className="text-lg font-medium opacity-90">{greeting.text},</span>
               </div>
               <h1 className="text-2xl font-bold mb-1">{studentData.name}!</h1>
-              <p className="text-indigo-100 text-sm">
+              <p className="text-yellow-100 text-sm">
                 Student ID: {studentData.id} • {studentData.semester}
               </p>
             </div>
           </div>
 
           <div className="text-right">
-            <p className="text-indigo-100 text-sm mb-2">Today's Date</p>
+            <p className="text-yellow-100 text-sm mb-2">Today's Date</p>
             <p className="text-xl font-semibold">
               {new Date().toLocaleDateString('en-US', { 
                 weekday: 'short', 
@@ -68,7 +68,7 @@ const WelcomeCard = () => {
         </div>
 
         <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
-          <p className="text-sm text-indigo-100 mb-2">Quick Tip</p>
+          <p className="text-sm text-yellow-100 mb-2">Quick Tip</p>
           <p className="text-white font-medium">
             "Success is the sum of small efforts repeated day in and day out." Keep up the great work! 🚀
           </p>

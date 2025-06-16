@@ -5,8 +5,8 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const [notifications] = useState(3);
   
   const studentData = {
-    name: "Alex Johnson",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+    name: "Koushik Bala",
+    avatar: "src/koushik-bala-pp.jpg"
   };
 
   return (

@@ -4,25 +4,28 @@ import Header from './Header';
 import DashboardHome from './DashboardHome';
 import AttendanceView from './AttendanceView';
 import RoutineView from './RoutineView';
-//import AssignmentView from './AssignmentView';
+import AssignmentView from './AssignmentView';
+import CoursesView from './CoursesView';
+import AchievementsView from './AchievementsView';
+import ThemeCustomizer from './ThemeCustomizer';
 
 const Dashboard = () => {
   const [activeView, setActiveView] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  // Define view components in an object for cleaner code
+  const viewComponents = {
+    dashboard: <DashboardHome />,
+    attendance: <AttendanceView />,
+    routine: <RoutineView />,
+    assignments: <AssignmentView />,
+    courses: <CoursesView />,
+    achievements: <AchievementsView />,
+    themecustomizer:<ThemeCustomizer/>,
+  };
+
   const renderContent = () => {
-    switch (activeView) {
-      case 'dashboard':
-        return <DashboardHome />;
-      case 'attendance':
-        return <AttendanceView />;
-      case 'routine':
-        return <RoutineView />;
-      //case 'assignments':
-        //return <AssignmentView />;
-      default:
-        return <DashboardHome />;
-    }
+    return viewComponents[activeView] || <DashboardHome />;
   };
 
   return (
@@ -46,6 +49,9 @@ const Dashboard = () => {
           {renderContent()}
         </main>
       </div>
+
+      {/* Theme Customizer */}
+      <ThemeCustomizer />
     </div>
   );
 };

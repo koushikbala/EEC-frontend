@@ -18,8 +18,8 @@ const RoutineView = () => {
     monday: [
       {
         id: 1,
-        course: "JavaScript Fundamentals",
-        instructor: "Dr. Smith",
+        course: "Mathematics",
+        instructor: "Dr. Romit Beed",
         time: "10:00 AM - 11:30 AM",
         room: "Room 101",
         type: "Lecture",
@@ -27,8 +27,8 @@ const RoutineView = () => {
       },
       {
         id: 2,
-        course: "Database Design",
-        instructor: "Dr. Brown",
+        course: "Science",
+        instructor: "Joyti Ghosh Dastidar",
         time: "2:00 PM - 3:30 PM",
         room: "Lab 203",
         type: "Lab",
@@ -38,8 +38,8 @@ const RoutineView = () => {
     tuesday: [
       {
         id: 3,
-        course: "UI/UX Design",
-        instructor: "Ms. Davis",
+        course: "English Language",
+        instructor: "Ms. Benedict Joseph",
         time: "9:00 AM - 10:30 AM",
         room: "Studio 301",
         type: "Workshop",
@@ -47,8 +47,8 @@ const RoutineView = () => {
       },
       {
         id: 4,
-        course: "React Development",
-        instructor: "Prof. Johnson",
+        course: "Computer Application",
+        instructor: "Soumyojit Pal",
         time: "1:00 PM - 2:30 PM",
         room: "Lab 105",
         type: "Practical",
@@ -58,7 +58,7 @@ const RoutineView = () => {
     wednesday: [
       {
         id: 5,
-        course: "JavaScript Fundamentals",
+        course: "Environment Science",
         instructor: "Dr. Smith",
         time: "10:00 AM - 11:30 AM",
         room: "Room 101",
@@ -69,8 +69,8 @@ const RoutineView = () => {
     thursday: [
       {
         id: 6,
-        course: "Database Design",
-        instructor: "Dr. Brown",
+        course: "Biology",
+        instructor: "Sonali Sen",
         time: "11:00 AM - 12:30 PM",
         room: "Lab 203",
         type: "Lab",
@@ -78,8 +78,8 @@ const RoutineView = () => {
       },
       {
         id: 7,
-        course: "UI/UX Design",
-        instructor: "Ms. Davis",
+        course: "Bengali",
+        instructor: "Kathali Mitra",
         time: "3:00 PM - 4:30 PM",
         room: "Studio 301",
         type: "Workshop",
@@ -89,8 +89,8 @@ const RoutineView = () => {
     friday: [
       {
         id: 8,
-        course: "React Development",
-        instructor: "Prof. Johnson",
+        course: "Sports",
+        instructor: "Bartam Da Silva",
         time: "2:00 PM - 3:30 PM",
         room: "Lab 105",
         type: "Practical",
@@ -142,7 +142,7 @@ const RoutineView = () => {
               onClick={() => setSelectedDay(day.id)}
               className={`p-3 rounded-lg text-center transition-all ${
                 selectedDay === day.id
-                  ? 'bg-indigo-500 text-white shadow-lg'
+                  ? 'bg-indigo-500 text-black shadow-lg'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >

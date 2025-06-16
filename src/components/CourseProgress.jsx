@@ -5,41 +5,41 @@ const CourseProgress = () => {
   const courses = [
     { 
       id: 1, 
-      name: "JavaScript Fundamentals", 
+      name: "Mathematics", 
       progress: 85, 
       totalLessons: 20, 
       completedLessons: 17, 
-      instructor: "Dr. Smith", 
+      instructor: "Dr. Romit Beed", 
       nextClass: "Mon 10:00 AM",
       color: "bg-yellow-500"
     },
     { 
       id: 2, 
-      name: "React Development", 
+      name: "Science", 
       progress: 70, 
       totalLessons: 15, 
       completedLessons: 10, 
-      instructor: "Prof. Johnson", 
+      instructor: "Jyoti Ghosh Dastidar", 
       nextClass: "Wed 2:00 PM",
       color: "bg-blue-500"
     },
     { 
       id: 3, 
-      name: "Database Design", 
+      name: "English Language", 
       progress: 60, 
       totalLessons: 18, 
       completedLessons: 11, 
-      instructor: "Dr. Brown", 
+      instructor: "Benedict Joseph", 
       nextClass: "Fri 11:00 AM",
       color: "bg-green-500"
     },
     { 
       id: 4, 
-      name: "UI/UX Design", 
+      name: "Computer Application", 
       progress: 45, 
       totalLessons: 12, 
       completedLessons: 5, 
-      instructor: "Ms. Davis", 
+      instructor: "Soumyojit Pal", 
       nextClass: "Tue 3:00 PM",
       color: "bg-purple-500"
     }

@@ -66,24 +66,24 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50 px-4">
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-md w-full space-y-6 border border-white/20">
         
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-yellow-500 to-amber-600 rounded-full flex items-center justify-center mb-4">
             <Lock className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">
             Welcome to EEC
           </h1>
           <p className="text-gray-600">Please sign in to your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="space-y-5">
           {/* Username Field */}
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Username</label>
+            <label className="block text-sm font-semibold text-gray-700 text-left">Username</label>
             <div className="relative">
               <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
               <input
@@ -92,7 +92,7 @@ const LoginForm = () => {
                 value={formData.username}
                 onChange={handleInputChange}
                 placeholder="Enter your username"
-                className={`w-full pl-10 pr-4 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
+                className={`w-full pl-10 pr-4 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none ${
                   errors.username 
                     ? 'border-red-300 bg-red-50' 
                     : 'border-gray-300 hover:border-gray-400 focus:bg-white'
@@ -112,7 +112,7 @@ const LoginForm = () => {
               <label className="text-sm font-semibold text-gray-700">Password</label>
               <button
                 type="button"
-                className="text-sm text-indigo-600 hover:text-indigo-800 transition-colors duration-200"
+                className="text-sm text-yellow-600 hover:text-yellow-800 transition-colors duration-200"
               >
                 Forgot password?
               </button>
@@ -125,7 +125,7 @@ const LoginForm = () => {
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Enter your password"
-                className={`w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
+                className={`w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none ${
                   errors.password 
                     ? 'border-red-300 bg-red-50' 
                     : 'border-gray-300 hover:border-gray-400 focus:bg-white'
@@ -154,7 +154,7 @@ const LoginForm = () => {
               name="rememberMe"
               checked={formData.rememberMe}
               onChange={handleInputChange}
-              className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+              className="w-4 h-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500"
             />
             <label htmlFor="remember" className="ml-2 text-sm text-gray-700">
               Remember me for 30 days
@@ -165,7 +165,8 @@ const LoginForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            onClick={handleSubmit}
+            className="w-full bg-gradient-to-r from-yellow-600 to-amber-600 text-white py-3 rounded-xl hover:from-yellow-700 hover:to-amber-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
@@ -182,7 +183,7 @@ const LoginForm = () => {
             Don't have an account?{' '}
             <button
               type="button"
-              className="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors duration-200"
+              className="text-yellow-600 hover:text-yellow-800 font-semibold transition-colors duration-200"
             >
               Create Account
             </button>
@@ -214,7 +215,7 @@ const LoginForm = () => {
               Sign in with Google
             </span>
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

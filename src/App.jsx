@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import LoginForm from './components/LoginForm'
-import Dashboard from './components/Dashboard' // You'll need to create this
-
+import Dashboard from './components/Dashboard' 
 function App() {
   return (
     <BrowserRouter>
