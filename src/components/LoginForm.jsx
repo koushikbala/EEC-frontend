@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, Lock, User, Mail } from 'lucide-react';
+import { Eye, EyeOff, Lock, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [showPass, setShowPass] = useState(false);
@@ -10,6 +11,7 @@ const LoginForm = () => {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -17,8 +19,7 @@ const LoginForm = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -26,33 +27,25 @@ const LoginForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
     if (!formData.username.trim()) {
       newErrors.username = 'Username is required';
     }
-    
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
-    
     setIsLoading(true);
-    
-    // Simulate API call
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       console.log('Login attempt:', formData);
-      // Handle successful login here
     } catch (error) {
       console.error('Login failed:', error);
     } finally {
@@ -62,19 +55,18 @@ const LoginForm = () => {
 
   const handleGoogleLogin = () => {
     console.log("Redirect to Google OAuth");
-    // Add Google OAuth implementation
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 px-4">
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-md w-full space-y-6 border border-white/20">
         
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center mb-4">
             <Lock className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-500 to-amber-600 bg-clip-text text-transparent">
             Welcome to EEC
           </h1>
           <p className="text-gray-600">Please sign in to your account</p>
@@ -92,7 +84,7 @@ const LoginForm = () => {
                 value={formData.username}
                 onChange={handleInputChange}
                 placeholder="Enter your username"
-                className={`w-full pl-10 pr-4 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
+                className={`w-full pl-10 pr-4 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none ${
                   errors.username 
                     ? 'border-red-300 bg-red-50' 
                     : 'border-gray-300 hover:border-gray-400 focus:bg-white'
@@ -100,9 +92,7 @@ const LoginForm = () => {
               />
             </div>
             {errors.username && (
-              <p className="text-red-500 text-sm flex items-center gap-1">
-                {errors.username}
-              </p>
+              <p className="text-red-500 text-sm">{errors.username}</p>
             )}
           </div>
 
@@ -112,7 +102,7 @@ const LoginForm = () => {
               <label className="text-sm font-semibold text-gray-700">Password</label>
               <button
                 type="button"
-                className="text-sm text-indigo-600 hover:text-indigo-800 transition-colors duration-200"
+                className="text-sm text-yellow-600 hover:text-amber-700 transition-colors duration-200"
               >
                 Forgot password?
               </button>
@@ -125,7 +115,7 @@ const LoginForm = () => {
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Enter your password"
-                className={`w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
+                className={`w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none ${
                   errors.password 
                     ? 'border-red-300 bg-red-50' 
                     : 'border-gray-300 hover:border-gray-400 focus:bg-white'
@@ -133,16 +123,14 @@ const LoginForm = () => {
               />
               <button
                 type="button"
-                className="absolute right-3 top-1 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                className="absolute right-3 top-1 text-gray-400 hover:text-gray-600"
                 onClick={() => setShowPass(!showPass)}
               >
                 {showPass ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
             {errors.password && (
-              <p className="text-red-500 text-sm flex items-center gap-1">
-                {errors.password}
-              </p>
+              <p className="text-red-500 text-sm">{errors.password}</p>
             )}
           </div>
 
@@ -154,7 +142,7 @@ const LoginForm = () => {
               name="rememberMe"
               checked={formData.rememberMe}
               onChange={handleInputChange}
-              className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+              className="w-4 h-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500"
             />
             <label htmlFor="remember" className="ml-2 text-sm text-gray-700">
               Remember me for 30 days
@@ -165,7 +153,7 @@ const LoginForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
@@ -182,7 +170,8 @@ const LoginForm = () => {
             Don't have an account?{' '}
             <button
               type="button"
-              className="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors duration-200"
+              onClick={() => navigate('/signup')}
+              className="text-yellow-600 hover:text-amber-700 font-semibold transition-colors duration-200"
             >
               Create Account
             </button>
