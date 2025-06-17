@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Lock, User } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [showPass, setShowPass] = useState(false);
@@ -58,8 +58,8 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 px-4">
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-md w-full space-y-6 border border-white/20">
+    <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100">
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-md w-full mx-auto space-y-6 border border-white/20">
         
         {/* Header */}
         <div className="text-center space-y-2">
@@ -204,6 +204,10 @@ const LoginForm = () => {
             </span>
           </button>
         </form>
+
+        <Link to="/profile" className="text-yellow-600 hover:text-amber-700 font-semibold">
+          Edit Profile
+        </Link>
       </div>
     </div>
   );

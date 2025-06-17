@@ -7,6 +7,7 @@ import SignupForm from './components/SignupForm'
 import Dashboard from './components/Dashboard' 
 import ComplaintManagementSystem from './parents/ComplaintManagementSystem'
 import AdminApp from './admin/AdminApp' 
+import ProfileUpdate from './components/ProfileUpdate'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signup" element={<SignupForm/>}/>
         <Route path="/complaint" element={<ComplaintManagementSystem/>}/>
         <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/profile" element={<ProfileUpdate />} />
       </Routes>
     </BrowserRouter>
   )

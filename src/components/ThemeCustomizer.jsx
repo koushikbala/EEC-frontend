@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Settings } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Settings, Check } from 'lucide-react';
 
 const ThemeCustomizer = ({ onThemeChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,11 +18,11 @@ const ThemeCustomizer = ({ onThemeChange }) => {
     '#ef4444', // Red
     '#06b6d4', // Cyan
     '#f59e0b', // Orange
-    '#374151'  // Dark Gray
+    '#374151', // Dark Gray
   ];
 
-  // Whenever any theme setting changes, call the parent callback
-  const updateTheme = (newSettings) => {
+  // Update the theme whenever any setting changes
+  useEffect(() => {
     const themeConfig = {
       skin,
       contentWidth,
@@ -31,59 +31,47 @@ const ThemeCustomizer = ({ onThemeChange }) => {
       menuHidden,
       rtlEnabled,
       navbarColor,
-      ...newSettings
     };
-    
     if (onThemeChange) {
       onThemeChange(themeConfig);
     }
-  };
+  }, [skin, contentWidth, menuLayout, menuCollapsed, menuHidden, rtlEnabled, navbarColor, onThemeChange]);
 
   const handleSkinChange = (newSkin) => {
     setSkin(newSkin);
-    updateTheme({ skin: newSkin });
   };
 
   const handleContentWidthChange = (newWidth) => {
     setContentWidth(newWidth);
-    updateTheme({ contentWidth: newWidth });
   };
 
   const handleMenuLayoutChange = (newLayout) => {
     setMenuLayout(newLayout);
-    updateTheme({ menuLayout: newLayout });
   };
 
   const handleMenuCollapsedChange = () => {
-    const newCollapsed = !menuCollapsed;
-    setMenuCollapsed(newCollapsed);
-    updateTheme({ menuCollapsed: newCollapsed });
+    setMenuCollapsed((prev) => !prev);
   };
 
   const handleMenuHiddenChange = () => {
-    const newHidden = !menuHidden;
-    setMenuHidden(newHidden);
-    updateTheme({ menuHidden: newHidden });
+    setMenuHidden((prev) => !prev);
   };
 
   const handleRtlChange = () => {
-    const newRtl = !rtlEnabled;
-    setRtlEnabled(newRtl);
-    updateTheme({ rtlEnabled: newRtl });
+    setRtlEnabled((prev) => !prev);
   };
 
   const handleNavbarColorChange = (newColor) => {
     setNavbarColor(newColor);
-    updateTheme({ navbarColor: newColor });
   };
 
   return (
     <>
       {/* Theme Customizer Panel */}
       {isOpen && (
-        <div className="fixed right-0 top-0 w-80 h-full bg-white shadow-2xl border-l border-gray-200 flex flex-col z-50">
+        <div className="fixed right-0 top-0 w-80 h-full bg-white shadow-2xl border-l border-yellow-100 flex flex-col z-50">
           {/* Header */}
-          <div className="p-4 border-b border-gray-200">
+          <div className="p-4 border-b border-yellow-100">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Theme Customizer</h2>
@@ -91,7 +79,8 @@ const ThemeCustomizer = ({ onThemeChange }) => {
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-1 hover:bg-yellow-100 rounded-lg transition-colors"
+                aria-label="Close Theme Customizer"
               >
                 <X size={20} className="text-gray-500" />
               </button>
@@ -110,9 +99,10 @@ const ThemeCustomizer = ({ onThemeChange }) => {
                     onClick={() => handleSkinChange(option)}
                     className={`px-3 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
                       skin === option
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-yellow-500 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-yellow-200'
                     }`}
+                    aria-pressed={skin === option}
                   >
                     {option.replace('-', ' ')}
                   </button>
@@ -130,9 +120,10 @@ const ThemeCustomizer = ({ onThemeChange }) => {
                     onClick={() => handleContentWidthChange(option)}
                     className={`flex-1 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
                       contentWidth === option
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-yellow-500 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-yellow-200'
                     }`}
+                    aria-pressed={contentWidth === option}
                   >
                     {option} Width
                   </button>
@@ -147,8 +138,10 @@ const ThemeCustomizer = ({ onThemeChange }) => {
                 <button 
                   onClick={handleRtlChange}
                   className={`w-12 h-6 rounded-full relative transition-colors ${
-                    rtlEnabled ? 'bg-blue-600' : 'bg-gray-200'
+                    rtlEnabled ? 'bg-yellow-500' : 'bg-gray-200'
                   }`}
+                  aria-label={`Toggle RTL ${rtlEnabled ? 'off' : 'on'}`}
+                  aria-checked={rtlEnabled}
                 >
                   <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform shadow-sm ${
                     rtlEnabled ? 'translate-x-6' : 'translate-x-0.5'
@@ -170,9 +163,10 @@ const ThemeCustomizer = ({ onThemeChange }) => {
                     onClick={() => handleMenuLayoutChange(option)}
                     className={`flex-1 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
                       menuLayout === option
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-yellow-500 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-yellow-200'
                     }`}
+                    aria-pressed={menuLayout === option}
                   >
                     {option}
                   </button>
@@ -187,8 +181,10 @@ const ThemeCustomizer = ({ onThemeChange }) => {
                 <button 
                   onClick={handleMenuCollapsedChange}
                   className={`w-12 h-6 rounded-full relative transition-colors ${
-                    menuCollapsed ? 'bg-blue-600' : 'bg-gray-200'
+                    menuCollapsed ? 'bg-yellow-500' : 'bg-gray-200'
                   }`}
+                  aria-label={`Toggle Menu Collapsed ${menuCollapsed ? 'off' : 'on'}`}
+                  aria-checked={menuCollapsed}
                 >
                   <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform shadow-sm ${
                     menuCollapsed ? 'translate-x-6' : 'translate-x-0.5'
@@ -207,8 +203,10 @@ const ThemeCustomizer = ({ onThemeChange }) => {
                 <button 
                   onClick={handleMenuHiddenChange}
                   className={`w-12 h-6 rounded-full relative transition-colors ${
-                    menuHidden ? 'bg-blue-600' : 'bg-gray-200'
+                    menuHidden ? 'bg-yellow-500' : 'bg-gray-200'
                   }`}
+                  aria-label={`Toggle Menu Hidden ${menuHidden ? 'off' : 'on'}`}
+                  aria-checked={menuHidden}
                 >
                   <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform shadow-sm ${
                     menuHidden ? 'translate-x-6' : 'translate-x-0.5'
@@ -228,14 +226,21 @@ const ThemeCustomizer = ({ onThemeChange }) => {
                   <button
                     key={index}
                     onClick={() => handleNavbarColorChange(color)}
-                    className={`w-8 h-8 rounded-lg transition-all hover:scale-110 ${
+                    className={`w-8 h-8 rounded-lg transition-all hover:scale-110 relative ${
                       navbarColor === color 
-                        ? 'ring-2 ring-blue-500 ring-offset-2' 
+                        ? 'ring-2 ring-yellow-500 ring-offset-2' 
                         : ''
                     }`}
                     style={{ backgroundColor: color }}
                     title={`Color ${index + 1}`}
-                  ></button>
+                    aria-label={`Select Navbar Color ${index + 1}`}
+                  >
+                    {navbarColor === color && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Check size={16} className="text-white" />
+                      </div>
+                    )}
+                  </button>
                 ))}
               </div>
             </div>
@@ -247,8 +252,9 @@ const ThemeCustomizer = ({ onThemeChange }) => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-3 rounded-l-lg shadow-lg hover:bg-blue-700 transition-colors z-40"
+          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-yellow-500 text-white p-3 rounded-l-lg shadow-lg hover:bg-yellow-600 transition-colors z-40"
           title="Open Theme Customizer"
+          aria-label="Open Theme Customizer"
         >
           <Settings size={20} />
         </button>
@@ -259,6 +265,7 @@ const ThemeCustomizer = ({ onThemeChange }) => {
         <div 
           className="fixed inset-0 bg-black bg-opacity-25 z-40"
           onClick={() => setIsOpen(false)}
+          aria-hidden="true"
         ></div>
       )}
     </>
