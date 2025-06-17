@@ -1,9 +1,9 @@
 import React from 'react';
 import { ChevronRight, X } from 'lucide-react';
-import { ADMIN_MENU_ITEMS } from '../../utils/adminConstants';
+import { ADMIN_MENU_ITEMS } from './adminConstants';
+import { NavLink } from 'react-router-dom';
 
 const AdminSidebar = ({ 
-  activeMenuItem, 
   onMenuItemClick, 
   collapsed = false, 
   onToggleSidebar 
@@ -13,7 +13,7 @@ const AdminSidebar = ({
       {/* Mobile Overlay */}
       {collapsed && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-gray-900/50 z-40 lg:hidden"
           onClick={onToggleSidebar}
         />
       )}
@@ -21,59 +21,69 @@ const AdminSidebar = ({
       <div className={`
         ${collapsed ? 'translate-x-0' : '-translate-x-full'} 
         lg:translate-x-0 fixed lg:relative z-50 w-80 
-        bg-gradient-to-b from-orange-400 to-orange-500 text-white 
-        flex flex-col h-full transition-transform duration-300
+        bg-white border-r border-gray-200
+        flex flex-col h-full transition-transform duration-300 shadow-lg
       `}>
         {/* Logo */}
-        <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">💙</span>
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center">
+                <span className="text-white text-xl font-bold">E</span>
+              </div>
+              <span className="text-2xl font-bold text-gray-800">EEC Admin</span>
             </div>
-            <span className="text-2xl font-bold">EEC Admin</span>
+            <button 
+              onClick={onToggleSidebar}
+              className="p-2 hover:bg-gray-100 rounded-lg lg:hidden text-gray-500"
+            >
+              <X size={20} />
+            </button>
           </div>
-          <button 
-            onClick={onToggleSidebar}
-            className="p-2 hover:bg-white hover:bg-opacity-20 rounded-lg lg:hidden"
-          >
-            <X size={20} />
-          </button>
         </div>
 
         {/* Menu Items */}
-        <nav className="flex-1 px-4 pb-4 overflow-y-auto">
+        <nav className="flex-1 px-4 py-4 overflow-y-auto">
           {ADMIN_MENU_ITEMS.map((item, index) => {
             const Icon = item.icon;
-            const isActive = item.label === activeMenuItem;
             return (
-              <div
+              <NavLink
                 key={index}
+                to={item.path}
                 onClick={() => {
                   onMenuItemClick(item.label);
-                  // Close sidebar on mobile after selection
                   if (window.innerWidth < 1024) {
                     onToggleSidebar();
                   }
                 }}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-xl mb-2 cursor-pointer transition-all duration-200 ${
-                  isActive 
-                    ? 'bg-white bg-opacity-20 backdrop-blur-sm shadow-lg' 
-                    : 'hover:bg-white hover:bg-opacity-10'
-                }`}
+                className={({ isActive }) => `
+                  flex items-center space-x-3 px-4 py-3 rounded-lg mb-1 
+                  group transition-colors duration-200
+                  ${isActive 
+                    ? 'bg-yellow-50 text-yellow-700' 
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}
+                `}
               >
-                <Icon size={20} />
+                <Icon size={20} className={`flex-shrink-0 transition-colors duration-200`} />
                 <span className="font-medium flex-1">{item.label}</span>
-                {item.hasSubmenu && <ChevronRight size={16} />}
-              </div>
+                {item.hasSubmenu && (
+                  <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
+                )}
+              </NavLink>
             );
           })}
         </nav>
 
         {/* Admin Info Footer */}
-        <div className="p-4 border-t border-white border-opacity-20">
-          <div className="text-center">
-            <p className="text-sm opacity-75">Logged in as</p>
-            <p className="font-semibold">Administrator</p>
+        <div className="p-4 border-t border-gray-200 bg-gray-50">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+              <span className="text-yellow-600 font-semibold">A</span>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">Admin User</p>
+              <p className="text-xs text-gray-500">administrator@eec.edu</p>
+            </div>
           </div>
         </div>
       </div>

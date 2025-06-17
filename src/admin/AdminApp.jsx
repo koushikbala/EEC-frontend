@@ -1,74 +1,96 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
-import AdminDashboard from './AdminDashboard';
+import { Routes, Route } from 'react-router-dom';
+import AdminLayout from './AdminLayout';
+import Dashboard from './Dashboard';
 import Analytics from './Analytics';
-import './AdminApp.css';
+import Teachers from './Teachers';
+import Students from './Students';
+import Routines from './Routines';
+import { useState } from 'react';
 
 const AdminApp = () => {
-  return (
-    <div className="admin-app">
-      {/* Sidebar */}
-      <div className="sidebar w-64">
-        <div className="sidebar-header">
-          <h2>Admin Panel</h2>
-        </div>
-        <nav className="sidebar-nav">
-          <NavLink to="/admin" end className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">🏠</span> Dashboard
-          </NavLink>
-          <NavLink to="/admin/analytics" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">📈</span> Analytics
-          </NavLink>
-          <NavLink to="/admin/teachers" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">👩‍🏫</span> Teachers
-          </NavLink>
-          <NavLink to="/admin/students" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">👩‍🎓</span> Students
-          </NavLink>
-          <NavLink to="/admin/parents" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">👨‍👩‍👧</span> Parents
-          </NavLink>
-          <NavLink to="/admin/courses" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">📚</span> Courses
-          </NavLink>
-          <NavLink to="/admin/subjects" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">📖</span> Subjects
-          </NavLink>
-          <NavLink to="/admin/attendance" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">✅</span> Student Attendance
-          </NavLink>
-          <NavLink to="/admin/examination" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">📝</span> Examination
-          </NavLink>
-          <NavLink to="/admin/routines" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">🕒</span> Routines
-          </NavLink>
-          <NavLink to="/admin/timetable" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">⏰</span> Teacher Timetable
-          </NavLink>
-          <NavLink to="/admin/lesson-plan" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <span className="icon">📅</span> Lesson Plan
-          </NavLink>
-        </nav>
-      </div>
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
 
-      {/* Main Content Area */}
-      <div className="main-content">
-        <Routes>
-          <Route index element={<AdminDashboard />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="teachers" element={<div><h2>Teachers Page</h2><p>Teachers content goes here.</p></div>} />
-          <Route path="students" element={<div><h2>Students Page</h2><p>Students content goes here.</p></div>} />
-          <Route path="parents" element={<div><h2>Parents Page</h2><p>Parents content goes here.</p></div>} />
-          <Route path="courses" element={<div><h2>Courses Page</h2><p>Courses content goes here.</p></div>} />
-          <Route path="subjects" element={<div><h2>Subjects Page</h2><p>Subjects content goes here.</p></div>} />
-          <Route path="attendance" element={<div><h2>Student Attendance Page</h2><p>Attendance content goes here.</p></div>} />
-          <Route path="examination" element={<div><h2>Examination Page</h2><p>Examination content goes here.</p></div>} />
-          <Route path="routines" element={<div><h2>Routines Page</h2><p>Routines content goes here.</p></div>} />
-          <Route path="timetable" element={<div><h2>Teacher Timetable Page</h2><p>Timetable content goes here.</p></div>} />
-          <Route path="lesson-plan" element={<div><h2>Lesson Plan Page</h2><p>Lesson Plan content goes here.</p></div>} />
-        </Routes>
-      </div>
-    </div>
+  const handleMenuItemClick = (item) => {
+    setActiveMenuItem(item);
+  };
+
+  return (
+    <AdminLayout
+      activeMenuItem={activeMenuItem}
+      onMenuItemClick={handleMenuItemClick}
+      sidebarCollapsed={sidebarCollapsed}
+      onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
+      adminUser={{
+        name: 'Admin User',
+        role: 'Administrator',
+        avatar: 'src/koushik-bala-pp.jpg',
+      }}
+    >
+      <Routes>
+        <Route index element={<Dashboard />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="teachers" element={<Teachers />} />
+        <Route path="students" element={<Students />} />
+        <Route path="routines" element={<Routines />} />
+        <Route path="parents" element={
+          <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
+            <div className="max-w-5xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
+              <h1 className="text-3xl font-bold text-yellow-700 mb-2">Parents Management</h1>
+              <p className="text-gray-600 mb-6">Manage and view parent information</p>
+            </div>
+          </div>
+        } />
+        <Route path="courses" element={
+          <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
+            <div className="max-w-5xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
+              <h1 className="text-3xl font-bold text-yellow-700 mb-2">Course Management</h1>
+              <p className="text-gray-600 mb-6">Manage and organize courses</p>
+            </div>
+          </div>
+        } />
+        <Route path="subjects" element={
+          <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
+            <div className="max-w-5xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
+              <h1 className="text-3xl font-bold text-yellow-700 mb-2">Subject Management</h1>
+              <p className="text-gray-600 mb-6">Manage and organize subjects</p>
+            </div>
+          </div>
+        } />
+        <Route path="attendance" element={
+          <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
+            <div className="max-w-5xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
+              <h1 className="text-3xl font-bold text-yellow-700 mb-2">Student Attendance</h1>
+              <p className="text-gray-600 mb-6">Track and manage student attendance</p>
+            </div>
+          </div>
+        } />
+        <Route path="examination" element={
+          <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
+            <div className="max-w-5xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
+              <h1 className="text-3xl font-bold text-yellow-700 mb-2">Examination Management</h1>
+              <p className="text-gray-600 mb-6">Manage examinations and results</p>
+            </div>
+          </div>
+        } />
+        <Route path="timetable" element={
+          <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
+            <div className="max-w-5xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
+              <h1 className="text-3xl font-bold text-yellow-700 mb-2">Teacher Timetable</h1>
+              <p className="text-gray-600 mb-6">View and manage teacher schedules</p>
+            </div>
+          </div>
+        } />
+        <Route path="lesson-plan" element={
+          <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
+            <div className="max-w-5xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
+              <h1 className="text-3xl font-bold text-yellow-700 mb-2">Lesson Plans</h1>
+              <p className="text-gray-600 mb-6">Create and manage lesson plans</p>
+            </div>
+          </div>
+        } />
+      </Routes>
+    </AdminLayout>
   );
 };
 
