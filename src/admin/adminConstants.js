@@ -54,7 +54,7 @@ export const ADMIN_MENU_ITEMS = [
   { 
     icon: Calendar, 
     label: 'Examination', 
-    path: '/admin/examination' 
+    path: '/admin/examination'
   },
   { 
     icon: Calendar, 
@@ -69,7 +69,7 @@ export const ADMIN_MENU_ITEMS = [
   { 
     icon: ClipboardList, 
     label: 'Lesson Plan', 
-    path: '/admin/lesson-plan',
+    path: '/admin/lesson-plans',
     hasSubmenu: true
   }
 ];

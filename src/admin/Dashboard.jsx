@@ -34,7 +34,7 @@ const Dashboard = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, index) => (
+          {stats.map((stat) => (
             <div 
               key={stat.label} 
               className="bg-gradient-to-br from-yellow-300 to-yellow-400 rounded-xl p-6 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300 border border-yellow-500"
