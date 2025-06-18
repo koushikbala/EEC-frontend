@@ -62,9 +62,9 @@ const AttendanceManagement = () => {
   return (
     <div className="p-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-400 to-blue-500 rounded-xl p-6 mb-6 text-white">
+      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-6 mb-6 text-white">
         <h1 className="text-3xl font-bold mb-2">Attendance Management</h1>
-        <p className="text-blue-100">Mark and track student attendance</p>
+        <p className="text-yellow-100">Mark and track student attendance</p>
       </div>
 
       {/* Controls */}
@@ -76,12 +76,12 @@ const AttendanceManagement = () => {
               <input
                 type="text"
                 placeholder="Search students..."
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
               />
             </div>
             
             <select 
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
               value={selectedClass}
               onChange={(e) => setSelectedClass(e.target.value)}
             >
@@ -93,12 +93,12 @@ const AttendanceManagement = () => {
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
             />
           </div>
 
           <button 
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
           >
             Save Attendance
           </button>
@@ -193,7 +193,7 @@ const AttendanceManagement = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-gray-500">Present</p>
-                <p className="text-2xl font-semibold text-green-600">
+                <p className="text-2xl font-semibold text-yellow-600">
                   {Object.values(attendanceData).filter(status => status === 'present').length}
                 </p>
               </div>
@@ -209,7 +209,7 @@ const AttendanceManagement = () => {
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Monthly Average</h3>
             <div className="text-center">
-              <p className="text-3xl font-semibold text-blue-600">95%</p>
+              <p className="text-3xl font-semibold text-yellow-600">95%</p>
               <p className="text-sm text-gray-500">Attendance Rate</p>
             </div>
           </div>
@@ -217,7 +217,7 @@ const AttendanceManagement = () => {
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Trends</h3>
             <div className="text-center">
-              <p className="text-3xl font-semibold text-green-600">↑ 2%</p>
+              <p className="text-3xl font-semibold text-yellow-600">↑ 2%</p>
               <p className="text-sm text-gray-500">vs Last Month</p>
             </div>
           </div>

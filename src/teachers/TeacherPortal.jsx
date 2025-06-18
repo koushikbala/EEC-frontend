@@ -35,7 +35,7 @@ const TeacherPortal = () => {
     <div className="min-h-screen bg-gray-100">
       {/* Mobile Sidebar Toggle */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-blue-500 text-white rounded-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-yellow-500 text-white rounded-lg"
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
         {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
@@ -48,8 +48,8 @@ const TeacherPortal = () => {
       `}>
         <div className="p-6">
           <div className="flex items-center space-x-3 mb-8">
-            <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-              <Users className="h-6 w-6 text-blue-600" />
+            <div className="h-12 w-12 rounded-full bg-yellow-100 flex items-center justify-center">
+              <Users className="h-6 w-6 text-yellow-600" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-gray-800">Teacher Portal</h2>
@@ -62,7 +62,7 @@ const TeacherPortal = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors"
+                className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-yellow-50 text-gray-700 hover:text-yellow-600 transition-colors"
               >
                 <item.icon className="h-5 w-5" />
                 <span>{item.label}</span>

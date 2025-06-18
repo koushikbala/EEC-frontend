@@ -11,9 +11,9 @@ import {
 
 const TeacherDashboard = () => {
   const quickStats = [
-    { label: 'Total Students', value: '45', icon: Users, color: 'blue' },
+    { label: 'Total Students', value: '45', icon: Users, color: 'yellow' },
     { label: 'Attendance Today', value: '92%', icon: Activity, color: 'green' },
-    { label: 'Pending Assignments', value: '12', icon: FileText, color: 'yellow' },
+    { label: 'Pending Assignments', value: '12', icon: FileText, color: 'red' },
     { label: 'Upcoming Meetings', value: '3', icon: Calendar, color: 'purple' }
   ];
 
@@ -41,9 +41,9 @@ const TeacherDashboard = () => {
   return (
     <div className="p-6">
       {/* Welcome Header */}
-      <div className="bg-gradient-to-r from-blue-400 to-blue-500 rounded-xl p-6 mb-6 text-white">
+      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-6 mb-6 text-white">
         <h1 className="text-3xl font-bold mb-2">Welcome, Teacher!</h1>
-        <p className="text-blue-100">Here's your daily overview</p>
+        <p className="text-yellow-100">Here's your daily overview</p>
       </div>
 
       {/* Quick Stats Grid */}
@@ -73,7 +73,7 @@ const TeacherDashboard = () => {
             <div className="space-y-4">
               {recentActivities.map((activity) => (
                 <div key={activity.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <Bell className="w-5 h-5 text-blue-500" />
+                  <Bell className="w-5 h-5 text-yellow-500" />
                   <div>
                     <p className="text-sm text-gray-800">{activity.message}</p>
                     <p className="text-xs text-gray-500">{activity.time}</p>
@@ -91,16 +91,16 @@ const TeacherDashboard = () => {
           </div>
           <div className="p-4">
             <div className="space-y-3">
-              <button className="w-full flex items-center space-x-2 p-3 text-left rounded-lg hover:bg-blue-50 transition-colors">
-                <ClipboardCheck className="w-5 h-5 text-blue-500" />
+              <button className="w-full flex items-center space-x-2 p-3 text-left rounded-lg hover:bg-yellow-50 transition-colors">
+                <ClipboardCheck className="w-5 h-5 text-yellow-500" />
                 <span className="text-sm text-gray-700">Mark Attendance</span>
               </button>
-              <button className="w-full flex items-center space-x-2 p-3 text-left rounded-lg hover:bg-blue-50 transition-colors">
-                <FileText className="w-5 h-5 text-blue-500" />
+              <button className="w-full flex items-center space-x-2 p-3 text-left rounded-lg hover:bg-yellow-50 transition-colors">
+                <FileText className="w-5 h-5 text-yellow-500" />
                 <span className="text-sm text-gray-700">Create Assignment</span>
               </button>
-              <button className="w-full flex items-center space-x-2 p-3 text-left rounded-lg hover:bg-blue-50 transition-colors">
-                <Calendar className="w-5 h-5 text-blue-500" />
+              <button className="w-full flex items-center space-x-2 p-3 text-left rounded-lg hover:bg-yellow-50 transition-colors">
+                <Calendar className="w-5 h-5 text-yellow-500" />
                 <span className="text-sm text-gray-700">Schedule Meeting</span>
               </button>
             </div>
