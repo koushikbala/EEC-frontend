@@ -154,7 +154,7 @@ const TeacherTimetable = () => {
           </div>
 
           <div className="flex items-center space-x-3">
-            <button className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="flex items-center space-x-2 bg-blue-600 text-black px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
               <Plus className="w-4 h-4" />
               <span>Add Schedule</span>
             </button>

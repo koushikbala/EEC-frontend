@@ -168,7 +168,7 @@ const ParentMeetings = () => {
               </div>
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                className="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600 transition-colors"
               >
                 Schedule Meeting
               </button>

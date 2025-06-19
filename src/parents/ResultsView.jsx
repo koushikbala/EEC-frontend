@@ -86,7 +86,7 @@ const ResultsView = () => {
             </div>
           </div>
 
-          <button className="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+          <button className="flex items-center space-x-2 bg-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors">
             <Download className="w-4 h-4" />
             <span>Download Report</span>
           </button>

@@ -98,7 +98,7 @@ const AttendanceManagement = () => {
           </div>
 
           <button 
-            className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+            className="px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600 transition-colors"
           >
             Save Attendance
           </button>
