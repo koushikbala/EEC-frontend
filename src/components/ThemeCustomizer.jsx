@@ -252,7 +252,7 @@ const ThemeCustomizer = ({ onThemeChange }) => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-yellow-500 text-white p-3 rounded-l-lg shadow-lg hover:bg-yellow-600 transition-colors z-40"
+          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-yellow-500 text-black p-3 rounded-l-lg shadow-lg hover:bg-yellow-600 transition-colors z-40"
           title="Open Theme Customizer"
           aria-label="Open Theme Customizer"
         >
