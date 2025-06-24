@@ -32,8 +32,8 @@ const Sidebar = ({ activeView, setActiveView, isOpen, setIsOpen }) => {
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-yellow-200">
         <div className={`flex items-center space-x-3 ${isOpen ? 'block' : 'hidden'}`}>
-          <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-sm">
-            <span className="text-white font-bold text-sm">EEC</span>
+          <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full overflow-hidden flex items-center justify-center shadow-sm">
+            <img src='/harrow-hall-school.png' className="text-white font-bold text-sm w-full"/>
           </div>
           <span className="font-bold text-amber-800">Student Portal</span>
         </div>
