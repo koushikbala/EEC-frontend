@@ -9,6 +9,8 @@ import AdminApp from './admin/AdminApp'
 import ProfileUpdate from './components/ProfileUpdate'
 import ParentPortal from './parents/ParentPortal'
 import TeacherPortal from './teachers/TeacherPortal'
+import FeedbackPage from './pages/FeedbackPage'
+import FeedbackThankYou from './pages/FeedbackThankYou'
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/profile" element={<ProfileUpdate />} />
         <Route path="/parents/*" element={<ParentPortal />} />
         <Route path="/teachers/*" element={<TeacherPortal />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
+        <Route path="/feedback/thank-you" element={<FeedbackThankYou />} />
       </Routes>
     </BrowserRouter>
   )
