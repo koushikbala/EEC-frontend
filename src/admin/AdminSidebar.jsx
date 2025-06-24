@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X, ChevronLeft } from 'lucide-react';
 import { ADMIN_MENU_ITEMS } from './adminConstants';
 import { NavLink } from 'react-router-dom';
 
@@ -10,34 +10,26 @@ const AdminSidebar = ({
 }) => {
   return (
     <>
-      {/* Mobile Overlay */}
-      {collapsed && (
-        <div 
-          className="fixed inset-0 bg-gray-900/50 z-40 lg:hidden"
-          onClick={onToggleSidebar}
-        />
-      )}
-      
       <div className={`
-        ${collapsed ? 'translate-x-0' : '-translate-x-full'} 
-        lg:translate-x-0 fixed lg:relative z-50 w-80 
+        ${collapsed ? "w-20": "w-70"}
         bg-white border-r border-gray-200
-        flex flex-col h-full transition-transform duration-300 shadow-lg
+        flex flex-col h-full shadow-lg
       `}>
         {/* Logo */}
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            {!collapsed && <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center">
                 <span className="text-white text-xl font-bold">E</span>
               </div>
               <span className="text-2xl font-bold text-gray-800">EEC Admin</span>
-            </div>
+            </div>}
             <button 
               onClick={onToggleSidebar}
-              className="p-2 hover:bg-gray-100 rounded-lg lg:hidden text-gray-500"
+              className="p-2 bg-transparent rounded-lg text-gray-500"
             >
-              <X size={20} />
+              {collapsed && <ChevronRight size={16} />}
+              {!collapsed && <ChevronLeft size={16} />}
             </button>
           </div>
         </div>
@@ -52,9 +44,6 @@ const AdminSidebar = ({
                 to={item.path}
                 onClick={() => {
                   onMenuItemClick(item.label);
-                  if (window.innerWidth < 1024) {
-                    onToggleSidebar();
-                  }
                 }}
                 className={({ isActive }) => `
                   flex items-center space-x-3 px-4 py-3 rounded-lg mb-1 
@@ -65,7 +54,7 @@ const AdminSidebar = ({
                 `}
               >
                 <Icon size={20} className={`flex-shrink-0 transition-colors duration-200`} />
-                <span className="font-medium flex-1">{item.label}</span>
+                {!collapsed && <span className="font-medium flex-1">{item.label}</span>}
                 {item.hasSubmenu && (
                   <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
                 )}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import DashboardNav from './components/DashboardNav';
 
 const stats = [
   { label: 'Teachers', value: 12, icon: '👨‍🏫', trend: '+2' },
@@ -14,7 +15,7 @@ const quickActions = [
   { title: 'Generate Report', action: 'report', icon: '📊' },
 ];
 
-const Dashboard = () => {
+const Dashboard = ({setShowAdminHeader}) => {
   const [selectedAction, setSelectedAction] = useState(null);
 
   const handleActionClick = (action) => {
@@ -23,14 +24,22 @@ const Dashboard = () => {
     setTimeout(() => setSelectedAction(null), 2000);
   };
 
+  // making the admin header invisible
+    useEffect(() => {
+      setShowAdminHeader(true)
+    }, [])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-yellow-300 to-yellow-400 p-8">
-      <div className="max-w-6xl mx-auto bg-yellow-50/95 rounded-2xl shadow-2xl p-8 border border-yellow-300">
+      <div className="mx-auto bg-yellow-50/95 rounded-2xl shadow-2xl p-8 border border-yellow-300">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-yellow-800 mb-2">Admin Dashboard</h1>
           <p className="text-yellow-700 text-lg">Overview of the institution's key statistics and quick actions.</p>
         </div>
+
+        {/* Navigation Menu - Only shown on dashboard */}
+        <DashboardNav />
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Search, 
   Filter, 
@@ -21,10 +21,12 @@ import {
 const mockTeachers = [
   {
     id: 1,
+    employeeId: 'EMP001',
     name: 'Dr. Sarah Johnson',
     email: 'sarah.johnson@school.edu',
     phone: '+1 (555) 123-4567',
     subject: 'Mathematics',
+    department: 'Mathematics',
     experience: 8,
     qualification: 'Ph.D. in Mathematics',
     students: 120,
@@ -36,10 +38,12 @@ const mockTeachers = [
   },
   {
     id: 2,
+    employeeId: 'EMP002',
     name: 'Prof. Michael Chen',
     email: 'michael.chen@school.edu',
     phone: '+1 (555) 234-5678',
     subject: 'Physics',
+    department: 'Physics',
     experience: 12,
     qualification: 'Ph.D. in Physics',
     students: 95,
@@ -51,10 +55,12 @@ const mockTeachers = [
   },
   {
     id: 3,
+    employeeId: 'EMP003',
     name: 'Ms. Emily Rodriguez',
     email: 'emily.rodriguez@school.edu',
     phone: '+1 (555) 345-6789',
     subject: 'English Literature',
+    department: 'English',
     experience: 6,
     qualification: 'M.A. in English',
     students: 140,
@@ -66,10 +72,12 @@ const mockTeachers = [
   },
   {
     id: 4,
+    employeeId: 'EMP004',
     name: 'Dr. James Wilson',
     email: 'james.wilson@school.edu',
     phone: '+1 (555) 456-7890',
     subject: 'Chemistry',
+    department: 'Chemistry',
     experience: 15,
     qualification: 'Ph.D. in Chemistry',
     students: 110,
@@ -81,10 +89,12 @@ const mockTeachers = [
   },
   {
     id: 5,
+    employeeId: 'EMP005',
     name: 'Ms. Lisa Thompson',
     email: 'lisa.thompson@school.edu',
     phone: '+1 (555) 567-8901',
     subject: 'Biology',
+    department: 'Biology',
     experience: 10,
     qualification: 'M.S. in Biology',
     students: 130,
@@ -96,10 +106,12 @@ const mockTeachers = [
   },
   {
     id: 6,
+    employeeId: 'EMP006',
     name: 'Prof. David Kumar',
     email: 'david.kumar@school.edu',  
     phone: '+1 (555) 678-9012',
     subject: 'Computer Science',
+    department: 'Computer Science',
     experience: 7,
     qualification: 'M.S. in Computer Science',
     students: 85,
@@ -108,16 +120,81 @@ const mockTeachers = [
     joinDate: '2020-11-01',
     location: 'Building E, Room 210',
     avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 7,
+    employeeId: 'EMP007',
+    name: 'Dr. Rachel Green',
+    email: 'rachel.green@school.edu',
+    phone: '+1 (555) 789-0123',
+    subject: 'History',
+    department: 'History',
+    experience: 9,
+    qualification: 'Ph.D. in History',
+    students: 105,
+    rating: 4.5,
+    status: 'Active',
+    joinDate: '2019-03-20',
+    location: 'Building F, Room 102',
+    avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 8,
+    employeeId: 'EMP008',
+    name: 'Mr. Alex Martinez',
+    email: 'alex.martinez@school.edu',
+    phone: '+1 (555) 890-1234',
+    subject: 'Art',
+    department: 'Fine Arts',
+    experience: 5,
+    qualification: 'M.F.A. in Fine Arts',
+    students: 75,
+    rating: 4.6,
+    status: 'Active',
+    joinDate: '2022-01-15',
+    location: 'Building G, Room 301',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 9,
+    employeeId: 'EMP009',
+    name: 'Dr. Maria Santos',
+    email: 'maria.santos@school.edu',
+    phone: '+1 (555) 901-2345',
+    subject: 'Spanish',
+    department: 'Foreign Languages',
+    experience: 13,
+    qualification: 'Ph.D. in Spanish Literature',
+    students: 90,
+    rating: 4.8,
+    status: 'On Leave',
+    joinDate: '2016-08-10',
+    location: 'Building H, Room 205',
+    avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 10,
+    employeeId: 'EMP010',
+    name: 'Prof. Robert Lee',
+    email: 'robert.lee@school.edu',
+    phone: '+1 (555) 012-3456',
+    subject: 'Geography',
+    department: 'Social Studies',
+    experience: 11,
+    qualification: 'M.A. in Geography',
+    students: 115,
+    rating: 4.7,
+    status: 'Active',
+    joinDate: '2017-09-05',
+    location: 'Building I, Room 150',
+    avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face'
   }
 ];
 
-const Teachers = () => {
-  const [teachers, setTeachers] = useState(mockTeachers);
+const Teachers = ({setShowAdminHeader}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('All');
-  const [selectedTeacher, setSelectedTeacher] = useState(null);
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [teachers] = useState(mockTeachers);
 
   // Filter teachers based on search and status
   const filteredTeachers = teachers.filter(teacher => {
@@ -128,307 +205,149 @@ const Teachers = () => {
     return matchesSearch && matchesStatus;
   });
 
-  // Calculate statistics
-  const stats = {
-    total: teachers.length,
-    active: teachers.filter(t => t.status === 'Active').length,
-    onLeave: teachers.filter(t => t.status === 'On Leave').length,
-    totalStudents: teachers.reduce((sum, t) => sum + t.students, 0),
-    avgRating: (teachers.reduce((sum, t) => sum + t.rating, 0) / teachers.length).toFixed(1)
-  };
-
-  const TeacherCard = ({ teacher }) => (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-yellow-100 hover:border-yellow-300">
-      {/* Card Header */}
-      <div className="relative p-6 pb-0">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <img
-                src={teacher.avatar}
-                alt={teacher.name}
-                className="w-16 h-16 rounded-full object-cover border-3 border-yellow-300"
-              />
-              <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white ${
-                teacher.status === 'Active' ? 'bg-green-500' : 'bg-orange-500'
-              }`}></div>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-gray-800">{teacher.name}</h3>
-              <p className="text-yellow-600 font-semibold">{teacher.subject}</p>
-              <div className="flex items-center mt-1">
-                <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                <span className="text-sm text-gray-600 ml-1">{teacher.rating}</span>
-              </div>
-            </div>
-          </div>
-          <div className="relative">
-            <button className="p-2 hover:bg-gray-100 rounded-full">
-              <MoreVertical className="w-5 h-5 text-gray-500" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Card Body */}
-      <div className="p-6 pt-4">
-        <div className="space-y-3">
-          <div className="flex items-center text-sm text-gray-600">
-            <Award className="w-4 h-4 mr-2 text-yellow-500" />
-            <span>{teacher.qualification}</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <Users className="w-4 h-4 mr-2 text-yellow-500" />
-            <span>{teacher.students} students</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <Calendar className="w-4 h-4 mr-2 text-yellow-500" />
-            <span>{teacher.experience} years experience</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <MapPin className="w-4 h-4 mr-2 text-yellow-500" />
-            <span>{teacher.location}</span>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex space-x-2 mt-6">
-          <button
-            onClick={() => setSelectedTeacher(teacher)}
-            className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
-          >
-            <Eye className="w-4 h-4 mr-2" />
-            View
-          </button>
-          <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
-            <Edit3 className="w-4 h-4 mr-2" />
-            Edit
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const TeacherModal = ({ teacher, onClose }) => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        {/* Modal Header */}
-        <div className="bg-gradient-to-r from-yellow-400 to-amber-400 p-6 rounded-t-2xl">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-white">Teacher Details</h2>
-            <button
-              onClick={onClose}
-              className="text-white hover:bg-white/20 p-2 rounded-full transition-colors"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-
-        {/* Modal Body */}
-        <div className="p-6">
-          <div className="text-center mb-6">
-            <img
-              src={teacher.avatar}
-              alt={teacher.name}
-              className="w-24 h-24 rounded-full mx-auto border-4 border-yellow-300 mb-4"
-            />
-            <h3 className="text-xl font-bold text-gray-800">{teacher.name}</h3>
-            <p className="text-yellow-600 font-semibold">{teacher.subject}</p>
-            <div className="flex items-center justify-center mt-2">
-              <Star className="w-5 h-5 text-yellow-500 fill-current" />
-              <span className="text-gray-600 ml-1">{teacher.rating} Rating</span>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <Mail className="w-5 h-5 text-yellow-500 mr-3" />
-              <div>
-                <p className="text-sm text-gray-500">Email</p>
-                <p className="text-gray-800">{teacher.email}</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Phone className="w-5 h-5 text-yellow-500 mr-3" />
-              <div>
-                <p className="text-sm text-gray-500">Phone</p>
-                <p className="text-gray-800">{teacher.phone}</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Award className="w-5 h-5 text-yellow-500 mr-3" />
-              <div>
-                <p className="text-sm text-gray-500">Qualification</p>
-                <p className="text-gray-800">{teacher.qualification}</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Calendar className="w-5 h-5 text-yellow-500 mr-3" />
-              <div>
-                <p className="text-sm text-gray-500">Experience</p>
-                <p className="text-gray-800">{teacher.experience} years</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Users className="w-5 h-5 text-yellow-500 mr-3" />
-              <div>
-                <p className="text-sm text-gray-500">Students</p>
-                <p className="text-gray-800">{teacher.students} students</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <MapPin className="w-5 h-5 text-yellow-500 mr-3" />
-              <div>
-                <p className="text-sm text-gray-500">Location</p>
-                <p className="text-gray-800">{teacher.location}</p>
-              </div>
-            </div>
-            <div className="bg-yellow-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-500 mb-1">Status</p>
-              <span className={`inline-flex px-3 py-1 rounded-full text-sm font-semibold ${
-                teacher.status === 'Active' 
-                  ? 'bg-green-100 text-green-800' 
-                  : 'bg-orange-100 text-orange-800'
-              }`}>
-                {teacher.status}
-              </span>
-            </div>
-          </div>
-
-          <div className="flex space-x-3 mt-6">
-            <button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-4 rounded-lg transition-colors">
-              <Edit3 className="w-4 h-4 inline mr-2" />
-              Edit Teacher
-            </button>
-            <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 px-4 rounded-lg transition-colors">
-              <Trash2 className="w-4 h-4 inline mr-2" />
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  // making the admin header invisible
+  useEffect(() => {
+    setShowAdminHeader(false)
+  }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">
-      <div className="max-w-7xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-8 border border-yellow-200">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-yellow-700">Teacher Management</h1>
-            <p className="text-gray-600 mt-2">Manage and monitor teaching staff</p>
+    <div className="h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 flex flex-col">
+      <div className="flex-1 flex flex-col max-w-7xl mx-auto w-full bg-white/90 rounded-2xl shadow-2xl m-4 border border-yellow-200 overflow-hidden">
+        
+        {/* Fixed Header Section */}
+        <div className="flex-shrink-0 p-8 bg-white/90 border-b border-yellow-100">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-yellow-700">Teacher Management</h1>
+              <p className="text-gray-600 mt-2">Manage and monitor teaching staff</p>
+            </div>
+            <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+              <Plus size={20} />
+              Add New Teacher
+            </button>
           </div>
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-            <Plus size={20} />
-            Add New Teacher
-          </button>
+
+          {/* Search and Filter */}
+          <div className="mb-6 flex gap-4">
+            <div className="flex-1 relative">
+              <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search teachers..."
+                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <select 
+              className="border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+            >
+              <option value="All">All Status</option>
+              <option value="Active">Active</option>
+              <option value="On Leave">On Leave</option>
+            </select>
+            <select className="border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+              <option value="">All Departments</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Biology">Biology</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="English">English</option>
+              <option value="History">History</option>
+              <option value="Fine Arts">Fine Arts</option>
+            </select>
+          </div>
         </div>
 
-        {/* Search and Filter */}
-        <div className="mb-6 flex gap-4">
-          <div className="flex-1 relative">
-            <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search teachers..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <select className="border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500">
-            <option value="">All Departments</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="Physics">Physics</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Biology">Biology</option>
-            {/* Add more department options */}
-          </select>
-        </div>
-
-        {/* Teachers Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-yellow-50">
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Teacher</th>
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Employee ID</th>
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Department</th>
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Qualification</th>
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Experience</th>
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Join Date</th>
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Status</th>
-                <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredTeachers.map((teacher) => (
-                <tr 
-                  key={teacher.id}
-                  className="hover:bg-yellow-50 transition-colors"
-                >
-                  <td className="border-b border-yellow-100 px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-yellow-200 flex items-center justify-center font-semibold text-yellow-700">
-                        {teacher.name.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900">{teacher.name}</div>
-                        <div className="flex items-center gap-4 mt-1">
-                          <a href={`mailto:${teacher.email}`} className="text-sm text-gray-500 hover:text-yellow-600 flex items-center gap-1">
-                            <Mail size={14} />
-                            {teacher.email}
-                          </a>
-                          <a href={`tel:${teacher.phone}`} className="text-sm text-gray-500 hover:text-yellow-600 flex items-center gap-1">
-                            <Phone size={14} />
-                            {teacher.phone}
-                          </a>
+        {/* Scrollable Table Container */}
+        <div className="flex-1 overflow-hidden">
+          <div className="h-full overflow-y-auto">
+            <table className="w-full border-collapse">
+              <thead className="sticky top-0 bg-yellow-50 z-10">
+                <tr>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Teacher</th>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Employee ID</th>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Department</th>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Qualification</th>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Experience</th>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Join Date</th>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Status</th>
+                  <th className="border-b border-yellow-100 px-6 py-3 text-left text-sm font-semibold text-yellow-800">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {filteredTeachers.map((teacher) => (
+                  <tr 
+                    key={teacher.id}
+                    className="hover:bg-yellow-50 transition-colors border-b border-gray-100"
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-yellow-200 flex items-center justify-center font-semibold text-yellow-700 flex-shrink-0">
+                          {teacher.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="font-medium text-gray-900 truncate">{teacher.name}</div>
+                          <div className="flex items-center gap-4 mt-1">
+                            <a href={`mailto:${teacher.email}`} className="text-sm text-gray-500 hover:text-yellow-600 flex items-center gap-1 truncate">
+                              <Mail size={14} className="flex-shrink-0" />
+                              <span className="truncate">{teacher.email}</span>
+                            </a>
+                            <a href={`tel:${teacher.phone}`} className="text-sm text-gray-500 hover:text-yellow-600 flex items-center gap-1 flex-shrink-0">
+                              <Phone size={14} />
+                              {teacher.phone}
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="border-b border-yellow-100 px-6 py-4 text-gray-600">{teacher.employeeId}</td>
-                  <td className="border-b border-yellow-100 px-6 py-4 text-gray-600">{teacher.department}</td>
-                  <td className="border-b border-yellow-100 px-6 py-4 text-gray-600">{teacher.qualification}</td>
-                  <td className="border-b border-yellow-100 px-6 py-4 text-gray-600">{teacher.experience}</td>
-                  <td className="border-b border-yellow-100 px-6 py-4 text-gray-600">
-                    {new Date(teacher.joinDate).toLocaleDateString()}
-                  </td>
-                  <td className="border-b border-yellow-100 px-6 py-4">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                      ${teacher.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                      {teacher.status}
-                    </span>
-                  </td>
-                  <td className="border-b border-yellow-100 px-6 py-4">
-                    <div className="flex items-center gap-2">
-                      <button className="text-blue-600 hover:text-blue-800" title="Edit">
-                        <Edit2 size={16} />
-                      </button>
-                      <button className="text-red-600 hover:text-red-800" title="Delete">
-                        <Trash2 size={16} />
-                      </button>
-                      <button className="text-gray-600 hover:text-gray-800" title="More">
-                        <MoreVertical size={16} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 font-mono">{teacher.employeeId}</td>
+                    <td className="px-6 py-4 text-gray-600">{teacher.department}</td>
+                    <td className="px-6 py-4 text-gray-600">{teacher.qualification}</td>
+                    <td className="px-6 py-4 text-gray-600">{teacher.experience} years</td>
+                    <td className="px-6 py-4 text-gray-600">
+                      {new Date(teacher.joinDate).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                        ${teacher.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                        {teacher.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2">
+                        <button className="text-blue-600 hover:text-blue-800 p-1 hover:bg-blue-50 rounded" title="Edit">
+                          <Edit2 size={16} />
+                        </button>
+                        <button className="text-red-600 hover:text-red-800 p-1 hover:bg-red-50 rounded" title="Delete">
+                          <Trash2 size={16} />
+                        </button>
+                        <button className="text-gray-600 hover:text-gray-800 p-1 hover:bg-gray-50 rounded" title="More">
+                          <MoreVertical size={16} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {/* Pagination */}
-        <div className="mt-6 flex items-center justify-between">
-          <div className="text-gray-600">
-            Showing {filteredTeachers.length} of {mockTeachers.length} teachers
-          </div>
-          <div className="flex gap-2">
-            <button className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-yellow-50">Previous</button>
-            <button className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-yellow-50">Next</button>
+        {/* Fixed Footer Section */}
+        <div className="flex-shrink-0 p-8 pt-4 bg-white/90 border-t border-yellow-100">
+          <div className="flex items-center justify-between">
+            <div className="text-gray-600">
+              Showing {filteredTeachers.length} of {mockTeachers.length} teachers
+            </div>
+            <div className="flex gap-2">
+              <button className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-yellow-50 transition-colors">Previous</button>
+              <button className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-yellow-50 transition-colors">Next</button>
+            </div>
           </div>
         </div>
       </div>
@@ -436,4 +355,4 @@ const Teachers = () => {
   );
 };
 
-export default Teachers;
+export default Teachers

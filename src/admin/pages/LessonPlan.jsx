@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   BookOpen, 
   Plus, 
@@ -22,12 +22,17 @@ import {
 } from 'lucide-react';
 import LessonPlanForm from '../components/LessonPlanForm';
 
-const LessonPlanPage = () => {
+const LessonPlanPage = ({setShowAdminHeader}) => {
   const [currentView, setCurrentView] = useState('grid');
   const [selectedSubject, setSelectedSubject] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingPlan, setEditingPlan] = useState(null);
+
+  // making the admin header invisible
+    useEffect(() => {
+      setShowAdminHeader(false)
+    }, [])
 
   // Sample lesson plans data
   const lessonPlans = [

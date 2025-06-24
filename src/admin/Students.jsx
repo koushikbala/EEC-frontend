@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Plus, Edit2, Trash2, MoreVertical } from 'lucide-react';
 
 const studentData = [
@@ -29,7 +29,7 @@ const studentData = [
   // Add more sample data as needed
 ];
 
-const Students = () => {
+const Students = ({setShowAdminHeader}) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredStudents = studentData.filter(student =>
@@ -37,6 +37,11 @@ const Students = () => {
     student.roll.includes(searchTerm) ||
     student.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // making the admin header invisible
+    useEffect(() => {
+      setShowAdminHeader(false)
+    }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">

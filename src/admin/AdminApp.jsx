@@ -22,32 +22,36 @@ const AdminApp = () => {
     setActiveMenuItem(item);
   };
 
+  // state to manage admin header
+  const [showAdminHeader, setShowAdminHeader] = useState(true)
+
   return (
     <AdminLayout
       activeMenuItem={activeMenuItem}
       onMenuItemClick={handleMenuItemClick}
       sidebarCollapsed={sidebarCollapsed}
-      onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
+      onToggleSidebar={() => {setSidebarCollapsed(!sidebarCollapsed)}}
       adminUser={{
         name: 'Admin User',
         role: 'Administrator',
         avatar: 'src/koushik-bala-pp.jpg',
       }}
+      showAdminHeader={showAdminHeader}
     >
       <Routes>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route index element={<Dashboard />} />
-        <Route path="analytics" element={<Analytics />} />
-        <Route path="teachers" element={<Teachers />} />
-        <Route path="students" element={<Students />} />
-        <Route path="routines" element={<Routines />} />
-        <Route path="parents" element={<ParentsManagement />} />
-        <Route path="courses" element={<CourseManagement />} />
-        <Route path="subjects" element={<SubjectManagement />} />
-        <Route path="attendance" element={<AttendanceManagement />} />
-        <Route path="examination" element={<ExaminationManagement />} />
-        <Route path="timetable" element={<TeacherTimetable />} />
-        <Route path="lesson-plans" element={<LessonPlanPage />} />
+        <Route path="dashboard" element={<Dashboard setShowAdminHeader={setShowAdminHeader} />} />
+        <Route index element={<Dashboard setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="analytics" element={<Analytics setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="teachers" element={<Teachers setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="students" element={<Students setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="routines" element={<Routines setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="parents" element={<ParentsManagement setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="courses" element={<CourseManagement setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="subjects" element={<SubjectManagement setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="attendance" element={<AttendanceManagement setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="examination" element={<ExaminationManagement setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="timetable" element={<TeacherTimetable setShowAdminHeader={setShowAdminHeader} />} />
+        <Route path="lesson-plans" element={<LessonPlanPage setShowAdminHeader={setShowAdminHeader} />} />
       </Routes>
     </AdminLayout>
   );

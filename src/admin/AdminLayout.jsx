@@ -10,7 +10,8 @@ const AdminLayout = ({
   sidebarCollapsed,
   onToggleSidebar,
   adminUser,
-  breadcrumbs = []
+  breadcrumbs = [],
+  showAdminHeader
 }) => {
   const defaultBreadcrumbs = [
     { label: 'Admin', path: '/admin' },
@@ -21,7 +22,7 @@ const AdminLayout = ({
   const currentBreadcrumbs = breadcrumbs.length > 0 ? breadcrumbs : defaultBreadcrumbs;
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex w-screen h-screen bg-gray-50">
       <AdminSidebar 
         activeMenuItem={activeMenuItem} 
         onMenuItemClick={onMenuItemClick}
@@ -30,10 +31,10 @@ const AdminLayout = ({
       />
       
       <div className="flex-1 flex flex-col min-w-0">
-        <AdminHeader 
-          onToggleSidebar={onToggleSidebar}
+        {showAdminHeader && <AdminHeader 
+          sidebarCollapsed={sidebarCollapsed}
           adminUser={adminUser}
-        />
+        />}
         
         {/* Breadcrumb */}
         <div className="px-4 lg:px-8 py-4 bg-white border-b">
@@ -53,7 +54,7 @@ const AdminLayout = ({
                 ))}
               </div>
             </div>
-            <button className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors flex-shrink-0">
+            <button className="p-2 bg-indigo-600 text-black rounded-lg hover:bg-indigo-700 transition-colors flex-shrink-0">
               <Grid3X3 size={20} />
             </button>
           </div>

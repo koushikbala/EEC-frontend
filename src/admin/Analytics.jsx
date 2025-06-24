@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Line, Pie, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -26,12 +26,17 @@ ChartJS.register(
   Legend
 );
 
-const Analytics = () => {
+const Analytics = ({setShowAdminHeader}) => {
   const [timeFilter, setTimeFilter] = useState('last6months');
 
   const handleTimeFilterChange = (e) => {
     setTimeFilter(e.target.value);
   };
+
+  // making the admin header invisible
+    useEffect(() => {
+      setShowAdminHeader(true)
+    }, [])
 
   // Data for Student Performance Trend (Line Chart)
   const performanceData = {

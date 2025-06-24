@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Calendar, Clock, Users, Search, Filter } from 'lucide-react';
 
-const ExaminationManagement = () => {
+const ExaminationManagement = ({setShowAdminHeader}) => {
+
+  // making the admin header invisible
+    useEffect(() => {
+      setShowAdminHeader(false)
+    }, [])
+
+
   const [examinations, setExaminations] = useState([
     {
       id: 1,

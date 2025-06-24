@@ -32,7 +32,7 @@ const TeacherPortal = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 flex">
       {/* Mobile Sidebar Toggle */}
       <button
         className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-yellow-500 text-white rounded-lg"
@@ -43,8 +43,9 @@ const TeacherPortal = () => {
 
       {/* Sidebar */}
       <div className={`
-        fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-40
+        fixed top-0 left-0 h-screen w-64 bg-white shadow-lg z-40 overflow-y-auto
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        transition-transform duration-300 ease-in-out
       `}>
         <div className="p-6">
           <div className="flex items-center space-x-3 mb-8">
@@ -73,15 +74,17 @@ const TeacherPortal = () => {
       </div>
 
       {/* Main Content */}
-      <div className="lg:ml-64 min-h-screen">
-        <Routes>
-          <Route path="/" element={<TeacherDashboard />} />
-          <Route path="/attendance" element={<AttendanceManagement />} />
-          <Route path="/health-updates" element={<HealthUpdates />} />
-          <Route path="/parent-meetings" element={<ParentMeetings />} />
-          <Route path="/assignments" element={<AssignmentManagement />} />
-          <Route path="/evaluation" element={<AssignmentEvaluation />} />
-        </Routes>
+      <div className="flex-1 lg:ml-64 min-h-screen overflow-hidden">
+        <div className="h-screen overflow-y-auto">
+          <Routes>
+            <Route path="/" element={<TeacherDashboard />} />
+            <Route path="/attendance" element={<AttendanceManagement />} />
+            <Route path="/health-updates" element={<HealthUpdates />} />
+            <Route path="/parent-meetings" element={<ParentMeetings />} />
+            <Route path="/assignments" element={<AssignmentManagement />} />
+            <Route path="/evaluation" element={<AssignmentEvaluation />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

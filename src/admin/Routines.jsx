@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, Clock, Calendar } from 'lucide-react';
 
 const routineData = [
@@ -31,7 +31,7 @@ const routineData = [
   // Add more routine data as needed
 ];
 
-const Routines = () => {
+const Routines = ({setShowAdminHeader}) => {
   const [selectedClass, setSelectedClass] = useState('');
   const [selectedSection, setSelectedSection] = useState('');
   const [selectedDay, setSelectedDay] = useState('Monday');
@@ -43,6 +43,11 @@ const Routines = () => {
   );
 
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  // making the admin header invisible
+    useEffect(() => {
+      setShowAdminHeader(false)
+    }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 p-8">

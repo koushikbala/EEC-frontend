@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
-const AdminHeader = ({ onToggleSidebar, adminUser }) => {
+const AdminHeader = ({ sidebarCollapsed, adminUser }) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -59,17 +59,11 @@ const AdminHeader = ({ onToggleSidebar, adminUser }) => {
   ];
 
   return (
-    <div className="border-b border-gray-200">
-      <header className="bg-white py-3 px-6">
-        <div className="flex items-center justify-between">
+    <div className={`border-b border-gray-200 max-w-[95vw] box-border`}>
+      <header className="bg-white py-3 px-6 w-full box-border">
+        <div className="flex items-center justify-between w-full">
           {/* Left Section */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={onToggleSidebar}
-              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg text-gray-600"
-            >
-              <Menu size={20} />
-            </button>
             
             {/* Search Bar */}
             <div className="hidden md:flex items-center">
@@ -169,7 +163,7 @@ const AdminHeader = ({ onToggleSidebar, adminUser }) => {
 
       {/* Navigation Bar */}
       <nav className="bg-white px-6 py-2 overflow-x-auto">
-        <div className="flex items-center space-x-1 min-w-max">
+        <div className="flex items-center space-x-1 w-full">
           {navigationLinks.map((link) => {
             const Icon = link.icon;
             return (

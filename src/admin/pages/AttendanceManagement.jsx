@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { UserCheck, Search, Filter, Calendar, Download, Users, Clock } from 'lucide-react';
 
-const AttendanceManagement = () => {
+const AttendanceManagement = ({setShowAdminHeader}) => {
+
+  // making the admin header invisible
+    useEffect(() => {
+      setShowAdminHeader(false)
+    }, [])
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
