@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
-const AdminHeader = ({ sidebarCollapsed, adminUser }) => {
+const AdminHeader = ({ adminUser }) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
